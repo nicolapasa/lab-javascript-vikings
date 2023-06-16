@@ -69,19 +69,20 @@ class War {
     }
 
     vikingAttack(){
-       const damage= this.vikingArmy[Math.floor(Math.random()*this.vikingArmy.length)].strength
+       let damage= this.vikingArmy[Math.floor(Math.random()*this.vikingArmy.length)].strength
        let indexSaxon=Math.floor(Math.random()*this.saxonArmy.length)
-       this.saxonArmy[indexSaxon].receiveDamage(damage)
-       if( this.saxonArmy[indexSaxon].health<0) this.saxonArmy.splice(indexSaxon, 1)
-       return this.saxonArmy[indexSaxon].receiveDamage(damage)
+       let res= this.saxonArmy[indexSaxon].receiveDamage(damage)
+       if( this.saxonArmy[indexSaxon].health<=0) this.saxonArmy.splice(indexSaxon, 1)
+       return res
+       
          
     }
     saxonAttack(){
-        const damage= this.saxonArmy[Math.floor(Math.random()*this.saxonArmy.length)].strength
+        let damage= this.saxonArmy[Math.floor(Math.random()*this.saxonArmy.length)].strength
         let indexViking=Math.floor(Math.random()*this.vikingArmy.length)
-        this.vikingArmy[indexViking].receiveDamage(damage)
-        if( this.vikingArmy[indexViking].health<0) this.vikingArmy.splice(indexViking, 1)
-        return this.vikingArmy[indexViking].receiveDamage(damage)
+        let res= this.vikingArmy[indexViking].receiveDamage(damage)
+        if( this.vikingArmy[indexViking].health<=0) this.vikingArmy.splice(indexViking, 1)
+        return  res
           
      }
 
@@ -93,8 +94,8 @@ class War {
 }
 
 
-const Odin=new Viking("Odin", 100, 10)
-const Lothar=new Viking("Lothar", 100, 10)
+const Odin=new Viking("Odin", 100, 50)
+const Lothar=new Viking("Lothar", 100, 50)
 const saxon1=new Saxon(50, 10)
 const saxon2=new Saxon(50, 10)
 
@@ -106,5 +107,8 @@ war.addSaxon(saxon1)
 war.addSaxon(saxon2)
 console.log(war.vikingAttack())
 console.log(war.saxonAttack())
+console.log(war.showStatus())
 console.log(war.vikingAttack())
 console.log(war.saxonAttack())
+console.log(war.showStatus())
+
